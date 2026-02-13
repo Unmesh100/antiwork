@@ -121,8 +121,10 @@ function HomeContent() {
         setLogoSize(60);
       } else if (window.innerWidth >= 470) {
         setLogoSize(48);
+      } else if (window.innerWidth >= 370) {
+        setLogoSize(34);
       } else {
-        setLogoSize(36);
+        setLogoSize(28);
       }
     };
 
