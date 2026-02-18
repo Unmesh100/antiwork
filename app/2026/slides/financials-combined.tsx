@@ -7,98 +7,103 @@ import {
 } from "@/components/ui/chart";
 
 const combinedConfig = {
-  creatorEarnings: {
-    label: "Creator Earnings",
-    color: "#3b82f6",
+  cogs: {
+    label: "COGS",
+    color: "#6b7280",
   },
-  netRevenue: {
-    label: "Net Revenue",
+  revenue: {
+    label: "Revenue",
     color: "#22c55e",
   },
   ebitda: {
     label: "EBITDA",
-    color: "#f59e0b",
+    color: "#ef4444",
   },
 } satisfies ChartConfig;
 
 const combinedData = [
-  { year: 2012, creatorEarnings: 600945, netRevenue: 48705, ebitda: -857776 },
+  {
+    year: 2012,
+    cogs: 82923,
+    revenue: 48705,
+    ebitda: -857776,
+  },
   {
     year: 2013,
-    creatorEarnings: 4940038,
-    netRevenue: 442765,
+    cogs: 503625,
+    revenue: 442765,
     ebitda: -1888616,
   },
   {
     year: 2014,
-    creatorEarnings: 13775340,
-    netRevenue: 915373,
+    cogs: 930540,
+    revenue: 915373,
     ebitda: -3357890,
   },
   {
     year: 2015,
-    creatorEarnings: 21046470,
-    netRevenue: 1318055,
+    cogs: 1229759,
+    revenue: 1318055,
     ebitda: -3724157,
   },
   {
     year: 2016,
-    creatorEarnings: 36251075,
-    netRevenue: 2274023,
+    cogs: 1886772,
+    revenue: 2274023,
     ebitda: -165763,
   },
   {
     year: 2017,
-    creatorEarnings: 41463817,
-    netRevenue: 2691894,
+    cogs: 2105608,
+    revenue: 2691894,
     ebitda: -88657,
   },
   {
     year: 2018,
-    creatorEarnings: 52395391,
-    netRevenue: 3387321,
+    cogs: 2600949,
+    revenue: 3387321,
     ebitda: 6595,
   },
   {
     year: 2019,
-    creatorEarnings: 73105515,
-    netRevenue: 4923912,
+    cogs: 3615674,
+    revenue: 4923912,
     ebitda: -219739,
   },
   {
     year: 2020,
-    creatorEarnings: 142301488,
-    netRevenue: 9210794,
+    cogs: 6565827,
+    revenue: 9210794,
     ebitda: -14580,
   },
   {
     year: 2021,
-    creatorEarnings: 185482505,
-    netRevenue: 10973980,
+    cogs: 6947156,
+    revenue: 10973980,
     ebitda: -1707180,
   },
   {
     year: 2022,
-    creatorEarnings: 185824553,
-    netRevenue: 10562409,
+    cogs: 6785049,
+    revenue: 10562409,
     ebitda: -1301719,
   },
   {
     year: 2023,
-    creatorEarnings: 170717933,
-    netRevenue: 20738507,
+    cogs: 6498316,
+    revenue: 20738507,
     ebitda: 9812816,
   },
   {
     year: 2024,
-    creatorEarnings: 145334418,
-    netRevenue: 18951309,
+    cogs: 5923421,
+    revenue: 18951309,
     ebitda: 5566088,
   },
   {
     year: 2025,
-    creatorEarnings: 108129029,
-    netRevenue: 17785731,
+    cogs: 6078821,
+    revenue: 17785731,
     ebitda: 5850931,
   },
 ];
@@ -126,35 +131,48 @@ export default function SlideFinancialsCombined() {
               stroke="currentColor"
               opacity={0.1}
             />
-            <XAxis dataKey="year" stroke="currentColor" />
+            <XAxis
+              dataKey="year"
+              stroke="currentColor"
+              tick={{ fontSize: 14 }}
+            />
             <YAxis
               tickFormatter={(value) => `$${(value / 1000000).toFixed(0)}M`}
               stroke="currentColor"
+              tick={{ fontSize: 14 }}
+              domain={[-4000000, "dataMax"]}
             />
             <ChartTooltip
               content={<ChartTooltipContent labelKey="year" prefix="$" />}
             />
             <Legend wrapperStyle={{ paddingTop: 10 }} />
             <Bar
-              dataKey="creatorEarnings"
-              fill={combinedConfig.creatorEarnings.color}
-              name="Creator Earnings"
+              dataKey="revenue"
+              fill={combinedConfig.revenue.color}
+              name="Revenue"
               radius={[4, 4, 0, 0]}
             />
             <Bar
-              dataKey="netRevenue"
-              fill={combinedConfig.netRevenue.color}
-              name="Net Revenue"
+              dataKey="cogs"
+              fill={combinedConfig.cogs.color}
+              name="COGS"
               radius={[4, 4, 0, 0]}
             />
             <Bar
               dataKey="ebitda"
               fill={combinedConfig.ebitda.color}
-              name="EBITDA"
+              name="EBITDA*"
               radius={[4, 4, 0, 0]}
             />
           </BarChart>
         </ChartContainer>
+      </div>
+      <div className="shrink-0 px-8 pb-4 text-center">
+        <p className="text-sm text-gray-500 md:text-base dark:text-gray-400">
+          * EBITDA is adjusted to add back capitalized software development and
+          one-time uncollected sales tax paid on retroactive registrations, to
+          better reflect operating cash flows.
+        </p>
       </div>
     </div>
   );
