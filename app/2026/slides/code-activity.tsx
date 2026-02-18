@@ -53,18 +53,17 @@ const rawData = [
   { month: "Dec '24", commits: 139, teamSize: 19 },
   { month: "Jan '25", commits: 114, teamSize: 12 },
   { month: "Feb '25", commits: 120, teamSize: 16 },
-  { month: "Mar '25", commits: 176, teamSize: 11 },
+  { month: "Mar '25", commits: 176, teamSize: 17 },
   { month: "Apr '25", commits: 103, teamSize: 17 },
-  { month: "May '25", commits: 59, teamSize: 11 },
-  { month: "Jun '25", commits: 118, teamSize: 12 },
-  { month: "Jul '25", commits: 109, teamSize: 12 },
+  { month: "May '25", commits: 59, teamSize: 14 },
+  { month: "Jun '25", commits: 118, teamSize: 14 },
+  { month: "Jul '25", commits: 109, teamSize: 14 },
   { month: "Aug '25", commits: 134, teamSize: 15 },
   { month: "Sep '25", commits: 188, teamSize: 12 },
-  { month: "Oct '25", commits: 140, teamSize: 12 },
-  { month: "Nov '25", commits: 86, teamSize: 13 },
-  { month: "Dec '25", commits: 110, teamSize: 14 },
-  { month: "Jan '26", commits: 168, teamSize: 15 },
-  { month: "Feb '26", commits: 88, teamSize: 15 },
+  { month: "Oct '25", commits: 140, teamSize: 11 },
+  { month: "Nov '25", commits: 86, teamSize: 12 },
+  { month: "Dec '25", commits: 110, teamSize: 9 },
+  { month: "Jan '26", commits: 168, teamSize: 8 },
 ];
 
 // Major LLM model launches and events
@@ -90,7 +89,7 @@ export default function SlideCodeActivity() {
     <div className="flex h-full w-full flex-col">
       <div className="mt-8 flex h-16 shrink-0 items-center justify-center md:mt-12 md:h-24">
         <h1 className="text-2xl font-bold text-gray-900 md:text-4xl dark:text-white">
-          Code Activity per Team Member
+          Code Activity per Engineer
         </h1>
       </div>
       <div className="flex min-h-0 w-full flex-1 items-center justify-center">
