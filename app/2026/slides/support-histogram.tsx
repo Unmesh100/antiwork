@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   Cell,
+  LabelList,
 } from "recharts";
 
 type ViewType = "all" | "ai_assistant" | "staff";
@@ -147,9 +148,6 @@ export default function SlideSupportHistogram() {
         <h1 className="text-xl font-bold text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
           Support Response Time Distribution
         </h1>
-        <p className="mt-2 text-base text-gray-600 md:text-lg dark:text-gray-400">
-          {totalResponses.toLocaleString()} total responses
-        </p>
       </div>
 
       {/* Key stat callout */}
@@ -223,6 +221,16 @@ export default function SlideSupportHistogram() {
                   opacity={index === 0 ? 1 : 0.7}
                 />
               ))}
+              <LabelList
+                dataKey="percentage"
+                position="top"
+                formatter={(value: number) => `${value.toFixed(1)}%`}
+                style={{
+                  fontSize: 10,
+                  fontWeight: 600,
+                  fill: typeColors[selectedType],
+                }}
+              />
             </Bar>
           </BarChart>
         </ResponsiveContainer>
