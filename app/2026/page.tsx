@@ -30,10 +30,14 @@ import SlideSupportHistogram from "./slides/support-histogram";
 import SlideBuyback from "./slides/buyback";
 import SlideBalanceSheet from "./slides/balance-sheet";
 import SlideCodeActivity from "./slides/code-activity";
+import SlideOfficeRendering from "./slides/office-rendering";
+import SlideOfficeCompleted from "./slides/office-completed";
 
 export default function AnnualMeeting() {
   const slides = [
     <Slide1 key={1} />,
+    <SlideOfficeRendering key="office-rendering" />,
+    <SlideOfficeCompleted key="office-completed" />,
     <SlideCeoTransition key="ceo-transition" />,
     <SlideNewTeamMembers key="new-team-members" />,
     <SlideHiringNyc key="hiring-nyc" />,
