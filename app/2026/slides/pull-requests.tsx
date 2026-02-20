@@ -75,13 +75,13 @@ const prData = [
 
 // Major LLM model launches
 const modelLaunches = [
-  { month: "Mar '23", label: "GPT-4" },
-  { month: "Jun '23", label: "Claude 2" },
-  { month: "Oct '23", label: "Sonnet 3.5" },
-  { month: "Feb '25", label: "GPT-4.5" },
-  { month: "Sep '25", label: "Sonnet 4.5" },
-  { month: "Oct '25", label: "Haiku 4.5" },
-  { month: "Nov '25", label: "Opus 4.5" },
+  { month: "Mar '23", label: "GPT-4", color: "#f97316" },
+  { month: "Jun '23", label: "Claude 2", color: "#f97316" },
+  { month: "Oct '23", label: "Sonnet 3.5", color: "#f97316" },
+  { month: "Feb '25", label: "GPT-4.5", color: "#f97316" },
+  { month: "Apr '25", label: "Went OSS", color: "#000000" },
+  { month: "Sep '25", label: "Sonnet 4.5", color: "#f97316" },
+  { month: "Nov '25", label: "Opus 4.5", color: "#f97316" },
 ];
 
 export default function SlidePullRequests() {
@@ -107,16 +107,21 @@ export default function SlidePullRequests() {
             <XAxis
               dataKey="month"
               stroke="currentColor"
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 14 }}
               angle={-45}
               textAnchor="end"
               height={60}
             />
-            <YAxis yAxisId="left" stroke="currentColor" />
+            <YAxis
+              yAxisId="left"
+              stroke="currentColor"
+              tick={{ fontSize: 14 }}
+            />
             <YAxis
               yAxisId="right"
               orientation="right"
               stroke="#a855f7"
+              tick={{ fontSize: 14 }}
               domain={[0, 50]}
             />
             <ChartTooltip
@@ -139,15 +144,15 @@ export default function SlidePullRequests() {
               <ReferenceLine
                 key={launch.label}
                 x={launch.month}
-                stroke="#f97316"
+                stroke={launch.color}
                 strokeDasharray="5 5"
                 strokeWidth={1}
                 yAxisId="left"
                 label={{
                   value: launch.label,
                   position: "top",
-                  fill: "#f97316",
-                  fontSize: 9,
+                  fill: launch.color,
+                  fontSize: 12,
                   fontWeight: "bold",
                 }}
               />

@@ -9,6 +9,7 @@ import {
   YAxis,
   ResponsiveContainer,
   Tooltip,
+  LabelList,
 } from "recharts";
 
 type ResponseType = "all" | "ai_assistant" | "staff";
@@ -276,13 +277,14 @@ export default function SlideSupportResponseTime() {
             <XAxis
               dataKey="month"
               stroke="currentColor"
-              tick={{ fontSize: 10 }}
+              tick={{ fontSize: 14 }}
               angle={-45}
               textAnchor="end"
               height={60}
             />
             <YAxis
               stroke={typeColors[selectedType]}
+              tick={{ fontSize: 14 }}
               tickFormatter={(value) => {
                 if (value >= 1) return `${value.toFixed(0)}h`;
                 return `${(value * 60).toFixed(0)}m`;
@@ -303,6 +305,7 @@ export default function SlideSupportResponseTime() {
                 backgroundColor: "rgba(255, 255, 255, 0.95)",
                 border: "1px solid #ccc",
                 borderRadius: "8px",
+                fontSize: "16px",
               }}
               formatter={(value: number) => {
                 if (value >= 1) {
@@ -317,7 +320,21 @@ export default function SlideSupportResponseTime() {
               name={metricLabel}
               radius={[2, 2, 0, 0]}
               opacity={0.8}
-            />
+            >
+              <LabelList
+                dataKey="value"
+                position="top"
+                formatter={(value: number) => {
+                  if (value >= 1) return `${value.toFixed(1)}h`;
+                  return `${(value * 60).toFixed(0)}m`;
+                }}
+                style={{
+                  fontSize: 10,
+                  fontWeight: 600,
+                  fill: typeColors[selectedType],
+                }}
+              />
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -328,7 +345,7 @@ export default function SlideSupportResponseTime() {
             <button
               key={type}
               onClick={() => setSelectedType(type)}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
+              className={`rounded-full px-4 py-2 text-base font-medium transition-colors ${
                 selectedType === type
                   ? "bg-white text-gray-900 shadow dark:bg-gray-900 dark:text-white"
                   : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -342,7 +359,7 @@ export default function SlideSupportResponseTime() {
         <div className="flex items-center gap-2 rounded-full bg-gray-200 p-1 dark:bg-gray-700">
           <button
             onClick={() => setUseP90(false)}
-            className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
+            className={`rounded-full px-4 py-2 text-base font-medium transition-colors ${
               !useP90
                 ? "bg-white text-gray-900 shadow dark:bg-gray-900 dark:text-white"
                 : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -352,7 +369,7 @@ export default function SlideSupportResponseTime() {
           </button>
           <button
             onClick={() => setUseP90(true)}
-            className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
+            className={`rounded-full px-4 py-2 text-base font-medium transition-colors ${
               useP90
                 ? "bg-white text-gray-900 shadow dark:bg-gray-900 dark:text-white"
                 : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"

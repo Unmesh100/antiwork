@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   Cell,
+  LabelList,
 } from "recharts";
 
 type ViewType = "all" | "ai_assistant" | "staff";
@@ -147,9 +148,6 @@ export default function SlideSupportHistogram() {
         <h1 className="text-xl font-bold text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
           Support Response Time Distribution
         </h1>
-        <p className="mt-2 text-sm text-gray-600 md:text-base dark:text-gray-400">
-          {totalResponses.toLocaleString()} total responses
-        </p>
       </div>
 
       {/* Key stat callout */}
@@ -158,7 +156,7 @@ export default function SlideSupportHistogram() {
           <span className="text-2xl font-bold text-green-700 md:text-4xl dark:text-green-400">
             {within1HourPercent}%
           </span>
-          <span className="ml-2 text-sm text-green-700 md:text-lg dark:text-green-400">
+          <span className="ml-2 text-base text-green-700 md:text-xl dark:text-green-400">
             responded within 1 hour
           </span>
         </div>
@@ -173,7 +171,7 @@ export default function SlideSupportHistogram() {
             <XAxis
               dataKey="bucket"
               stroke="currentColor"
-              tick={{ fontSize: 10 }}
+              tick={{ fontSize: 14 }}
               angle={-45}
               textAnchor="end"
               height={60}
@@ -181,6 +179,7 @@ export default function SlideSupportHistogram() {
             />
             <YAxis
               stroke={typeColors[selectedType]}
+              tick={{ fontSize: 14 }}
               domain={[0, 100]}
               tickFormatter={(value) => `${value}%`}
               label={{
@@ -199,6 +198,7 @@ export default function SlideSupportHistogram() {
                 backgroundColor: "rgba(255, 255, 255, 0.95)",
                 border: "1px solid #ccc",
                 borderRadius: "8px",
+                fontSize: "16px",
               }}
               formatter={(
                 value: number,
@@ -221,6 +221,16 @@ export default function SlideSupportHistogram() {
                   opacity={index === 0 ? 1 : 0.7}
                 />
               ))}
+              <LabelList
+                dataKey="percentage"
+                position="top"
+                formatter={(value: number) => `${value.toFixed(1)}%`}
+                style={{
+                  fontSize: 10,
+                  fontWeight: 600,
+                  fill: typeColors[selectedType],
+                }}
+              />
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -233,7 +243,7 @@ export default function SlideSupportHistogram() {
             <button
               key={type}
               onClick={() => setSelectedType(type)}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
+              className={`rounded-full px-4 py-2 text-base font-medium transition-colors ${
                 selectedType === type
                   ? "bg-white text-gray-900 shadow dark:bg-gray-900 dark:text-white"
                   : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"

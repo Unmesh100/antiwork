@@ -56,14 +56,16 @@ function CustomTooltip({
   };
 
   return (
-    <div className="rounded-lg border bg-white p-3 shadow-lg dark:border-gray-700 dark:bg-gray-800">
-      <p className="font-semibold text-gray-900 dark:text-white">{label}</p>
-      <p className="text-blue-600 dark:text-blue-400">
+    <div className="rounded-lg border bg-white p-4 shadow-lg dark:border-gray-700 dark:bg-gray-800">
+      <p className="text-lg font-semibold text-gray-900 dark:text-white">
+        {label}
+      </p>
+      <p className="text-lg text-blue-600 dark:text-blue-400">
         EBITDA: {formatValue(currentEbitda)}
       </p>
       {changeText && (
         <p
-          className={`text-sm ${currentEbitda >= (previousEbitda ?? 0) ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+          className={`text-base ${currentEbitda >= (previousEbitda ?? 0) ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
         >
           {changeText}
         </p>
@@ -80,35 +82,59 @@ export default function Slide5b() {
           EBITDA*
         </h1>
       </div>
-      <div className="flex w-full flex-1 items-center justify-center">
-        <ChartContainer config={ebitdaConfig} className="h-4/5 w-4/5">
-          <BarChart
-            data={ebitdaData}
-            margin={{ top: 40, right: 30, left: 40, bottom: 40 }}
-            accessibilityLayer
-          >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="currentColor"
-              opacity={0.1}
-            />
-            <XAxis dataKey="year" stroke="currentColor" />
-            <YAxis
-              tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
-              stroke="currentColor"
-            />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar
-              dataKey="ebitda"
-              fill={ebitdaConfig.ebitda.color}
-              name="EBITDA"
-              radius={4}
-            />
-          </BarChart>
-        </ChartContainer>
+      <div className="flex min-h-0 w-full flex-1 px-4">
+        {/* Left side - Chart (3/4) */}
+        <div className="flex w-3/4 items-center justify-center">
+          <ChartContainer config={ebitdaConfig} className="h-4/5 w-full">
+            <BarChart
+              data={ebitdaData}
+              margin={{ top: 40, right: 30, left: 40, bottom: 40 }}
+              accessibilityLayer
+            >
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="currentColor"
+                opacity={0.1}
+              />
+              <XAxis
+                dataKey="year"
+                stroke="currentColor"
+                tick={{ fontSize: 14 }}
+              />
+              <YAxis
+                tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
+                tick={{ fontSize: 14 }}
+                stroke="currentColor"
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Bar
+                dataKey="ebitda"
+                fill={ebitdaConfig.ebitda.color}
+                name="EBITDA"
+                radius={4}
+              />
+            </BarChart>
+          </ChartContainer>
+        </div>
+
+        {/* Right side - 2025 EBITDA (1/4) */}
+        <div className="flex w-1/4 flex-col justify-center border-l border-gray-200 pl-6 dark:border-gray-700">
+          <div className="rounded-xl bg-blue-50 p-5 dark:bg-blue-950">
+            <p className="text-3xl font-bold text-blue-600 md:text-4xl dark:text-blue-400">
+              $
+              {(
+                ebitdaData.find((d) => d.year === 2025)!.ebitda / 1_000_000
+              ).toFixed(1)}
+              M
+            </p>
+            <p className="mt-2 text-base text-gray-600 md:text-lg dark:text-gray-400">
+              2025 EBITDA
+            </p>
+          </div>
+        </div>
       </div>
       <div className="shrink-0 px-8 pb-4 text-center">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-500 md:text-base dark:text-gray-400">
           * EBITDA is adjusted to add back capitalized software development and
           one-time uncollected sales tax paid on retroactive registrations, to
           better reflect operating cash flows.
